@@ -40,15 +40,19 @@
 
 ## 效果示例
 
-| 图1 · 人物照片 | 图2 · 姿势线稿 | 生成结果 |
-| :-------: | :-------: | :--: |
-|    人物照片   |    姿势线稿   | 生成结果 |
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/example-input.jpg" width="230"><br><sub>图1 · 人物照片</sub></td>
+    <td align="center"><img src="docs/images/example-pose.png" width="230"><br><sub>图2 · 姿势线稿</sub></td>
+    <td align="center"><img src="docs/images/example-output.jpg" width="230"><br><sub>生成结果（豆包）</sub></td>
+  </tr>
+</table>
 
 一次真实使用（豆包，S008 站立竖叉）：保持人脸、服装、背景一致，仅重构姿势。
 
 豆包里的实际对话——两张图一起传，复制本库卡片里的提示词，一次生成：
 
-![豆包对话截图](docs/images/example-chat.png)
+<img src="docs/images/example-chat.png" width="620" alt="豆包对话截图">
 
 ## 目录结构
 
