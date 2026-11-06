@@ -58,6 +58,15 @@ aside h4{margin:0 0 8px;font-size:12px;color:var(--ink3);letter-spacing:.08em;te
 .adult .thumbs img{filter:blur(12px);transition:.2s}
 body.reveal .adult .thumbs img{filter:none}
 .empty{padding:40px;text-align:center;color:var(--ink3);font-size:13px}
+/* 首页示例条 */
+.demo{max-width:1560px;margin:0 auto;padding:18px 26px 0}
+.demo-flow{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:12px 16px;overflow-x:auto}
+.demo-flow figure{margin:0;text-align:center;flex:0 0 auto}
+.demo-flow img{height:132px;width:auto;border-radius:8px;object-fit:contain;background:#f5f4ef;display:block}
+.demo-flow figure.chat img{height:132px;width:auto}
+.demo-flow figcaption{font-size:10.5px;color:var(--ink3);margin-top:5px;white-space:nowrap}
+.demo-flow .op{color:var(--ink3);font-size:15px;flex:0 0 auto}
 @media(max-width:960px){
   .layout{grid-template-columns:1fr;padding:16px}
   aside{position:static;max-height:none}
@@ -74,6 +83,16 @@ body.reveal .adult .thumbs img{filter:none}
     <button class="warn" id="reveal">显示成人线稿</button>
   </div>
 </header>
+<section class="demo">
+  <div class="demo-flow">
+    <figure><img src="docs/images/example-input.jpg" alt="人物照片"><figcaption>图1 · 人物照片</figcaption></figure>
+    <span class="op">＋</span>
+    <figure><img src="docs/images/example-pose.png" alt="姿势线稿"><figcaption>图2 · 姿势线稿</figcaption></figure>
+    <span class="op">＝</span>
+    <figure><img src="docs/images/example-output.jpg" alt="生成结果"><figcaption>成片 · 豆包实测</figcaption></figure>
+    <figure class="chat"><img src="docs/images/example-chat.png" alt="豆包对话截图"><figcaption>豆包里的实际操作</figcaption></figure>
+  </div>
+</section>
 <div class="layout">
   <aside>
     <h4>目录</h4>
