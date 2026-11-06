@@ -1,10 +1,10 @@
-# 姿势库 · Pose Library
+# 姿态图鉴 · Pose Atlas
 
-> 280 个带分类、编号、现成提示词的人物姿势参考图。配合「人物照片 + 姿势线稿」做图生图，纯静态页面，双击即看。
+> 280 个人物姿势参考图，每个都配好编号、分类和可直接复制的提示词。选一张线稿，配上你的人物照片，就能让 TA 摆出任意姿态。
 
-## 打开方式
+![姿态图鉴预览](docs/images/preview.jpg)
 
-直接打开根目录的 [`index.html`](index.html)，或部署到任意静态托管（GitHub Pages / Vercel / Netlify / 对象存储）——没有后端、没有依赖、不需要构建。
+**[→ 在线浏览](https://zg-405.github.io/pose-studio-lite/)** ｜ 也可以下载后直接打开根目录的 [`index.html`](index.html)（纯静态，双击即看，无后端、无依赖、无需构建）
 
 ## 里面有什么
 
