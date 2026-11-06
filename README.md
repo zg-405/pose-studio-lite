@@ -4,7 +4,7 @@
 
 ![姿态图鉴预览](docs/images/preview.jpg)
 
-**[→ 在线浏览](https://zg-405.github.io/pose-studio-lite/)** ｜ 也可以下载后直接打开根目录的 [`index.html`](index.html)（纯静态，双击即看，无后端、无依赖、无需构建）
+浏览方式：下载仓库，直接打开根目录的 [`index.html`](index.html)（纯静态，双击即看，无后端、无依赖、无需构建）
 
 ## 里面有什么
 
