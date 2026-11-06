@@ -2,17 +2,13 @@
 data/catalog.json
 data/cache/
 
-# 导出的测试素材
-exports/
-exports_full/
-exports_kits/
-exports_p002/
-exports_library/
-*.zip
+# 导出的测试包 / 素材库（exports、exports_library、exports_kits …）
+exports*/
 
 # 常规
 __pycache__/
 *.pyc
+*.zip
 .DS_Store
 .env
 .venv/
