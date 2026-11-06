@@ -1,0 +1,18 @@
+# 本地抓取的完整姿势库（版权不属于本仓库，不要提交）
+data/catalog.json
+data/cache/
+
+# 导出的测试素材
+exports/
+exports_full/
+exports_kits/
+exports_p002/
+exports_library/
+*.zip
+
+# 常规
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.venv/
