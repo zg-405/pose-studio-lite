@@ -4015,6 +4015,7 @@ body.reveal .adult .thumbs img{filter:none}
     <p class="empty" id="empty" hidden>没有匹配的姿势，换个关键词试试。</p>
   </main>
 </div>
+<script src="names.en.js"></script>
 <script>
 const cards=[...document.querySelectorAll('.card')];
 let filter='all', kw='';
@@ -4131,6 +4132,18 @@ function applyLang(lang){
     if(!f.dataset.zh) f.dataset.zh=f.textContent;
     const z=f.dataset.zh; f.textContent = en?(VIEW[z]||z):z;
   });
+  // 姿势名（中文 ↔ 英文，见 names.en.js）
+  const N = window.POSE_EN || {};
+  document.querySelectorAll('.card .title span').forEach(sp=>{
+    if(!sp.dataset.zh) sp.dataset.zh=sp.textContent.trim();
+    const z=sp.dataset.zh; sp.textContent = en?(N[z]||z):z;
+  });
+  document.querySelectorAll('.toc-group a').forEach(a=>{
+    const nd=a.childNodes[1]; if(!nd||nd.nodeType!==3) return;
+    if(!a.dataset.zhName) a.dataset.zhName=nd.nodeValue.trim();
+    const z=a.dataset.zhName;
+    nd.nodeValue = en?(N[z]||z):z;
+  });
   document.querySelectorAll('.card').forEach(c=>{
     const zh=c.querySelector('.prompt'),
           btn=c.querySelector('.actions button:not(.ghost)'),
@@ -4155,6 +4168,19 @@ function applyLang(lang){
   document.title = en ? 'Pose Atlas · Pose Reference Library — 280 pose sheets'
                       : '图生图 · 人物姿势参考线稿库 | Pose Atlas — 280 个姿势';
 }
+/* 把英文名并进搜索索引，中英关键词都能搜到 */
+(function indexEnglishNames(){
+  const N=window.POSE_EN||{};
+  document.querySelectorAll('.card .title span').forEach(sp=>{
+    const en=N[sp.textContent.trim()], c=sp.closest('.card');
+    if(c&&en) c.dataset.text=(c.dataset.text||'')+' '+en.toLowerCase();
+  });
+  document.querySelectorAll('.toc-group a').forEach(a=>{
+    const nd=a.childNodes[1]; if(!nd||nd.nodeType!==3) return;
+    const en=N[nd.nodeValue.trim()], li=a.closest('li');
+    if(li&&en) li.dataset.text=(li.dataset.text||'')+' '+en.toLowerCase();
+  });
+})();
 document.getElementById('lang').onclick=()=>applyLang(LANG==='en'?'zh':'en');
 apply();
 applyLang(LANG);
