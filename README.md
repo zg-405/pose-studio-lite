@@ -2,6 +2,8 @@
 
 <sub>Pose Atlas · 280 个人物姿势参考（pose reference）</sub>
 
+简体中文 | [English](README.en.md)
+
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Poses](https://img.shields.io/badge/poses-280-brightgreen.svg)](#里面有什么)
 [![Static](https://img.shields.io/badge/no%20build-plain%20HTML-blue.svg)](index.html)
@@ -80,7 +82,8 @@
 ├── normal/           # 正常姿势线稿 107 张（webp）
 ├── adult/            # 成人风格线稿 173 张（webp）
 ├── docs/images/      # 效果示例图
-├── README.md
+├── README.md         # 简体中文说明
+├── README.en.md      # English readme
 └── LICENSE
 ```
 

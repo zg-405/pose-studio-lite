@@ -18,6 +18,7 @@ header h1{font-size:19px;margin:0 0 4px}
 header h1 .en{font-size:11.5px;font-weight:400;color:var(--ink3);margin-left:8px;letter-spacing:.04em;vertical-align:2px}
 header p{margin:0;color:var(--ink3);font-size:12.5px}
 .toolbar{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.toolbar .lang{margin-left:auto;font-size:12px;letter-spacing:.04em;min-width:46px}
 input[type=search]{height:34px;border:1px solid var(--line);border-radius:9px;padding:0 12px;min-width:260px;outline:none;background:#fbfbf9}
 input[type=search]:focus{border-color:#a1b496}
 button{border:1px solid var(--line);background:#fbfbf9;color:var(--ink2);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
@@ -81,6 +82,7 @@ body.reveal .adult .thumbs img{filter:none}
     <button data-f="general">只看正常</button>
     <button data-f="adult">只看成人</button>
     <button class="warn" id="reveal">显示成人线稿</button>
+    <button class="lang" id="lang" title="切换语言 / Switch language">EN</button>
   </div>
 </header>
 <div class="layout">
@@ -4056,15 +4058,104 @@ document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{
   b.classList.add('on'); filter=b.dataset.f; apply();
 });
 const rv=document.getElementById('reveal');
-if(localStorage.getItem('pose-reveal')==='1'){document.body.classList.add('reveal');rv.textContent='隐藏成人线稿';}
+if(LS('pose-reveal')==='1')document.body.classList.add('reveal');
 rv.onclick=()=>{
   const on=document.body.classList.toggle('reveal');
-  localStorage.setItem('pose-reveal', on?'1':'0');
-  rv.textContent = on ? '隐藏成人线稿' : '显示成人线稿';
+  LS('pose-reveal', on?'1':'0');
+  rv.textContent = T(on?'hide':'reveal');
 };
 function cp(id,b){navigator.clipboard.writeText(document.getElementById(id).textContent.trim()).then(()=>{
-  const t=b.textContent;b.textContent='已复制 ✓';setTimeout(()=>b.textContent=t,1200);});}
+  const t=b.textContent;b.textContent=T('copied');setTimeout(()=>b.textContent=t,1200);});}
 function cpText(t,b){navigator.clipboard.writeText(t).then(()=>{
   const o=b.textContent;b.textContent='✓';setTimeout(()=>b.textContent=o,1200);});}
+
+/* ---------- 中英切换 / language switch ---------- */
+const I18N={
+  zh:{all:'全部',gen:'只看正常',adu:'只看成人',reveal:'显示成人线稿',hide:'隐藏成人线稿',
+      h1:'图生图 · 人物姿势参考线稿库',
+      sub:'280 个姿势参考：正常 107 / 成人风格 173。每张含编号、分类与可一键复制的中英文提示词（已按「图1人物 / 图2姿势」写好）。',
+      search:'搜索姿势名 / 编号 / 分类',toc:'目录',gn:'正常姿势',au:'成人风格',
+      gp:'rating = general，可直接用于写真、电商、健身等内容场景',
+      ap:'rating = suggestive，姿态更具暗示性；默认模糊，点右上角「显示成人线稿」查看',
+      copy:'复制中文',en:'英文',copyEn:'复制提示词',dl:'下载线稿',copied:'已复制 ✓',
+      empty:'没有匹配的姿势，换个关键词试试。'},
+  en:{all:'All',gen:'General only',adu:'Adult only',reveal:'Reveal adult art',hide:'Hide adult art',
+      h1:'Pose Atlas · Pose Reference Library',
+      sub:'280 pose references — 107 general / 173 stylized. Every entry has an ID, a category and a copy-ready prompt (Chinese + English), written for “image 1 = your photo, image 2 = pose sheet”.',
+      search:'Search pose name / ID / category',toc:'Contents',gn:'General poses',au:'Stylized / adult',
+      gp:'rating = general — ready for portraits, e-commerce and fitness shots',
+      ap:'rating = suggestive — more suggestive poses, blurred by default; click “Reveal adult art”.',
+      copy:'中文',en:'English',copyEn:'Copy prompt',dl:'Download',copied:'Copied ✓',
+      empty:'No matching poses — try another keyword.'}
+};
+const CAT={'侧卧':'Side-lying','侧坐・少女坐':'Side sitting','前倾':'Leaning forward','前后位置':'Front-back position','全身':'Full body','半身':'Half body','双人':'Two people','可爱系':'Cute','后仰':'Leaning back','坐在上方':'Sitting on top','坐姿':'Sitting','坐着贴近':'Seated close','性感系':'Suggestive','扭转':'Twisting','正对卧位':'Facing lying','特殊':'Special','站姿':'Standing pose','站立':'Standing','站立贴近':'Standing close','背向坐':'Back-facing sit','胸线强调系':'Chest-accent','贴脸系':'Cheek-to-cheek','跪姿':'Kneeling','跪姿・爬姿':'Kneeling / crawling','蹲姿':'Squatting','躺卧':'Lying','躺姿':'Lying pose','面对面坐':'Face-to-face sitting','风格姿势':'Stylized'};
+const VIEW={'正面':'Front','侧面':'Side','斜侧':'3/4 view','俯视':'High angle','仰视':'Low angle'};
+function LS(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);return v;}catch(e){return null;}}
+let LANG = LS('pose-lang')==='en' ? 'en' : 'zh';
+function T(k){return (I18N[LANG]||I18N.zh)[k]||'';}
+function applyLang(lang){
+  LANG = lang; LS('pose-lang',lang);
+  document.documentElement.lang = lang==='en' ? 'en' : 'zh-CN';
+  const en = lang==='en';
+  const h1=document.querySelector('header h1');
+  h1.firstChild.nodeValue=T('h1');
+  const tag=h1.querySelector('.en'); if(tag) tag.style.display = en?'none':'';
+  document.querySelector('header p').textContent=T('sub');
+  const q=document.getElementById('q'); q.placeholder=T('search');
+  document.querySelector('[data-f="all"]').textContent=T('all');
+  document.querySelector('[data-f="general"]').textContent=T('gen');
+  document.querySelector('[data-f="adult"]').textContent=T('adu');
+  rv.textContent=T(document.body.classList.contains('reveal')?'hide':'reveal');
+  document.querySelector('aside h4').textContent=T('toc');
+  document.querySelectorAll('.section').forEach(s=>{
+    const cn=s.id==='sec-normal';
+    const h2=s.querySelector('h2');
+    if(h2&&h2.firstChild.nodeType===3) h2.firstChild.nodeValue=(cn?T('gn'):T('au'))+' ';
+    const p=s.querySelector('.sec-head p');
+    if(p) p.textContent = cn?T('gp'):T('ap');
+  });
+  document.querySelectorAll('.toc-group summary').forEach(s=>{
+    const bucket=(s.parentElement&&s.parentElement.dataset.bucket)||'';
+    if(s.firstChild.nodeType===3) s.firstChild.nodeValue = bucket==='normal'?T('gn'):T('au');
+  });
+  document.querySelectorAll('.cat h3').forEach(h=>{
+    const t=h.firstChild; if(!t||t.nodeType!==3) return;
+    if(!h.dataset.zh) h.dataset.zh=t.nodeValue.trim();
+    t.nodeValue=(en?(CAT[h.dataset.zh]||h.dataset.zh):h.dataset.zh)+' ';
+  });
+  document.querySelectorAll('.tags i').forEach(i=>{
+    if(!i.dataset.zh) i.dataset.zh=i.textContent;
+    const z=i.dataset.zh; i.textContent = en?(CAT[z]||VIEW[z]||z):z;
+  });
+  document.querySelectorAll('.thumbs figcaption').forEach(f=>{
+    if(!f.dataset.zh) f.dataset.zh=f.textContent;
+    const z=f.dataset.zh; f.textContent = en?(VIEW[z]||z):z;
+  });
+  document.querySelectorAll('.card').forEach(c=>{
+    const zh=c.querySelector('.prompt'),
+          btn=c.querySelector('.actions button:not(.ghost)'),
+          gh=c.querySelector('.actions button.ghost'),
+          dl=c.querySelector('.actions a[download]');
+    if(!zh||!btn) return;
+    if(!zh.dataset.zh) zh.dataset.zh=zh.textContent;
+    const enTxt = gh ? gh.dataset.en : '';
+    if(en){
+      if(enTxt) zh.textContent=enTxt;
+      btn.textContent=T('copyEn'); btn.onclick=()=>cpText(enTxt||zh.dataset.zh,btn);
+      if(gh){ gh.textContent='中文'; gh.onclick=()=>cpText(zh.dataset.zh,gh); }
+    }else{
+      zh.textContent=zh.dataset.zh;
+      btn.textContent=T('copy'); btn.onclick=()=>cp(zh.id,btn);
+      if(gh){ gh.textContent=T('en'); gh.onclick=()=>cpText(enTxt,gh); }
+    }
+    if(dl) dl.textContent=T('dl');
+  });
+  document.getElementById('empty').textContent=T('empty');
+  document.getElementById('lang').textContent = en?'中文':'EN';
+  document.title = en ? 'Pose Atlas · Pose Reference Library — 280 pose sheets'
+                      : '图生图 · 人物姿势参考线稿库 | Pose Atlas — 280 个姿势';
+}
+document.getElementById('lang').onclick=()=>applyLang(LANG==='en'?'zh':'en');
 apply();
+applyLang(LANG);
 </script></body></html>
