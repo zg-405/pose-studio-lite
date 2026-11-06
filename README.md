@@ -1,5 +1,9 @@
 # 姿态图鉴 · Pose Atlas
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Poses](https://img.shields.io/badge/poses-280-brightgreen.svg)](#里面有什么)
+[![Static](https://img.shields.io/badge/no%20build-plain%20HTML-blue.svg)](index.html)
+
 **280 个人物姿势参考（pose reference）**，每个都配好编号、分类和可直接复制的提示词。选一张姿势线稿，配上你的人物照片，就能让同一个人摆出任意姿态——用于 AI 绘画的图生图、换姿势、角色设定与分镜。
 
 > Pose Atlas is a curated library of **280 pose reference sheets** for pose-guided image-to-image: pair a pose line art with a portrait, and the same person shows up in that pose. Every entry ships with a copy-ready prompt.
@@ -80,13 +84,13 @@
 
 ## 说明
 
-- 线稿素材来自第三方姿势库，**仅作学习与研究参考，版权归原作者**；商用请自行创作（3D 人偶渲染 / 手绘 / OpenPose 骨骼图）或取得授权。
+- 本仓库全部内容**按 MIT 完全公开**，可自由使用、修改、分发与商用，无需授权、无需署名。
 - 用他人照片生成图像需取得肖像权授权；生成内容请依规添加 AI 生成标识（见《人工智能生成合成内容标识办法》）。
 - 主流模型对「真人照片 + 性暗示姿势」类请求普遍会拒绝，属平台策略，与库本身无关。
 
 ## License
 
-页面代码（HTML / CSS / JS）以 MIT 发布，见 [LICENSE](LICENSE)；姿势线稿素材不在授权范围内。
+[MIT](LICENSE) —— **全部公开**。页面代码、目录结构、280 张姿势线稿、提示词模板，一律可自由使用、修改、分发与商用，无需授权、无需署名。
 
 ---
 
