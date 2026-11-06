@@ -1,6 +1,8 @@
 # 姿态图鉴 · Pose Atlas
 
-> 280 个人物姿势参考图，每个都配好编号、分类和可直接复制的提示词。选一张线稿，配上你的人物照片，就能让 TA 摆出任意姿态。
+**280 个人物姿势参考（pose reference）**，每个都配好编号、分类和可直接复制的提示词。选一张姿势线稿，配上你的人物照片，就能让同一个人摆出任意姿态——用于 AI 绘画的图生图、换姿势、角色设定与分镜。
+
+> Pose Atlas is a curated library of **280 pose reference sheets** for pose-guided image-to-image: pair a pose line art with a portrait, and the same person shows up in that pose. Every entry ships with a copy-ready prompt.
 
 ![姿态图鉴预览](docs/images/preview.jpg)
 
@@ -23,6 +25,16 @@
 - 线稿下载
 
 页面左侧是**两层目录**（大类 → 编号-姿势名），点条目直接跳到对应卡片；顶部可搜索、可按「只看正常 / 只看成人」筛选。
+
+## 适用场景
+
+| 场景 | 怎么用这个库 |
+|---|---|
+| AI 换姿势 / 图生图 | 一张人物照 + 一张线稿，保持长相换动作 |
+| 人像写真、电商模特图 | 挑站姿 / 坐姿，配场景描述词批量出图 |
+| 角色设定、漫画分镜 | 同一角色换不同姿势，快速对齐构图 |
+| 健身 / 瑜伽 / 舞蹈动作参考 | 用动作幅度大的姿势做视觉参考 |
+| 学习提示词写法 | 中英双语 + 结构化模板，可直接抄 |
 
 ## 怎么用
 
@@ -75,3 +87,8 @@
 ## License
 
 页面代码（HTML / CSS / JS）以 MIT 发布，见 [LICENSE](LICENSE)；姿势线稿素材不在授权范围内。
+
+---
+
+<sub>关键词：姿势参考 · 姿势库 · 人物姿势 · 线稿 · 图生图 · 换姿势 · AI 绘画参考图 · 提示词模板 · 豆包 · 即梦 · GPT-Image · Stable Diffusion · pose reference · pose library · pose sheet · image-to-image · character sheet · prompt template</sub>
+
