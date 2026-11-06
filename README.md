@@ -1,6 +1,6 @@
 # 姿态图鉴 · Pose Atlas
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Poses](https://img.shields.io/badge/poses-280-brightgreen.svg)](#里面有什么)
 [![Static](https://img.shields.io/badge/no%20build-plain%20HTML-blue.svg)](index.html)
 
@@ -84,13 +84,13 @@
 
 ## 说明
 
-- 本仓库全部内容**按 MIT 完全公开**，可自由使用、修改、分发与商用，无需授权、无需署名。
+- 本仓库全部内容**按 Apache License 2.0 完全公开**，可自由使用、修改、分发与商用（含专利授权）；再分发时保留 [LICENSE](LICENSE) 与版权声明即可。
 - 用他人照片生成图像需取得肖像权授权；生成内容请依规添加 AI 生成标识（见《人工智能生成合成内容标识办法》）。
 - 主流模型对「真人照片 + 性暗示姿势」类请求普遍会拒绝，属平台策略，与库本身无关。
 
 ## License
 
-[MIT](LICENSE) —— **全部公开**。页面代码、目录结构、280 张姿势线稿、提示词模板，一律可自由使用、修改、分发与商用，无需授权、无需署名。
+[Apache License 2.0](LICENSE) —— **全部公开**。页面代码、目录结构、280 张姿势线稿、提示词模板，一律可自由使用、修改、分发与商用，含明确专利授权；唯一要求是再分发时保留许可证与版权声明。
 
 ---
 
