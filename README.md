@@ -1,4 +1,6 @@
-# 姿态图鉴 · Pose Atlas
+# 图生图 · 人物姿势参考线稿库
+
+<sub>Pose Atlas · 280 个人物姿势参考（pose reference）</sub>
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Poses](https://img.shields.io/badge/poses-280-brightgreen.svg)](#里面有什么)
@@ -8,7 +10,7 @@
 
 > Pose Atlas is a curated library of **280 pose reference sheets** for pose-guided image-to-image: pair a pose line art with a portrait, and the same person shows up in that pose. Every entry ships with a copy-ready prompt.
 
-![姿态图鉴预览](docs/images/preview.jpg)
+![图生图 · 人物姿势参考线稿库 预览](docs/images/preview.jpg)
 
 浏览方式：下载仓库，直接打开根目录的 [`index.html`](index.html)（纯静态，双击即看，无后端、无依赖、无需构建）
 
