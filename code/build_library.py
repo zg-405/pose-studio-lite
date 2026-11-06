@@ -75,15 +75,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--views", default="front")
     ap.add_argument("--out", default=os.path.join(ROOT, "exports_library"))
+    ap.add_argument("--format", default="png", choices=["png", "webp"],
+                    help="png=通用（体积大）；webp=保留原始线稿（体积约为 1/8，适合上仓库）")
     args = ap.parse_args()
 
     out = args.out
+    ext = "." + args.format
     dirs = {"normal": os.path.join(out, "normal"), "adult": os.path.join(out, "adult")}
     for d in dirs.values():
         os.makedirs(d, exist_ok=True)
     views = [v.strip() for v in args.views.split(",") if v.strip()]
 
-    # 1) 并发下载 + 转 PNG
+    # 1) 并发下载（png 模式额外转码）
     tasks = []
     for p in CATALOG:
         bucket = "normal" if p.get("rating") == "general" else "adult"
@@ -97,15 +100,17 @@ def main():
 
     def work(t):
         p, v, bucket, base = t
-        webp, png = base + ".webp", base + ".png"
-        if os.path.exists(png) and os.path.getsize(png) > 1024:  # 已转好，跳过下载
-            return True, p, v, bucket, os.path.basename(png)
-        ok = grab(ASSET + p["views"][v], webp)
-        if ok:
-            subprocess.run(["sips", "-s", "format", "png", webp, "--out", png],
-                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            ok = os.path.exists(png)
-        return ok, p, v, bucket, os.path.basename(png)
+        src, dst = base + ".webp", base + ext
+        if os.path.exists(dst) and os.path.getsize(dst) > 1024:  # 已就绪，跳过
+            return True, p, v, bucket, os.path.basename(dst)
+        if not os.path.exists(src) or os.path.getsize(src) < 1024:
+            if not grab(ASSET + p["views"][v], src):
+                return False, p, v, bucket, os.path.basename(dst)
+        if args.format == "webp":
+            return True, p, v, bucket, os.path.basename(src)
+        subprocess.run(["sips", "-s", "format", "png", src, "--out", dst],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return os.path.exists(dst), p, v, bucket, os.path.basename(dst)
 
     results = []
     with ThreadPoolExecutor(max_workers=8) as pool:
