@@ -1,6 +1,6 @@
 # 图生图 · 人物姿势参考线稿库
 
-<sub>Pose Atlas · 280 个人物姿势参考（pose reference）</sub>
+<sub>Pose Atlas · 280 个人物姿势参考（an open pose reference library / pose library）</sub>
 
 简体中文 | [English](README.en.md)
 
